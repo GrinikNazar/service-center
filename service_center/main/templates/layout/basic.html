@@ -1,0 +1,78 @@
+{% load django_bootstrap5 %}
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>{% block title %}Головна{% endblock %}</title>
+        {% bootstrap_css %}
+        <link rel="stylesheet" type="text/css" href="{% static 'main/style.css' %}">
+        {% bootstrap_javascript %}
+    </head>
+
+    <body class="container-fluid">
+
+        <header class="mb-4">
+            <h1 class="display-1 text-center">Сервісний центр</h1>
+        </header>
+
+        <nav class="row navbar navbar-expand-md bg-light">
+            <div class="col container">
+                <a class="navbar-brand" href="{% url 'main:index' %}">Головна</a>
+                <a class="navbar-brand" href="{% url 'main:index' %}">Добавити бренди </a>
+                <a class="navbar-brand" href="{% url 'main:index' %}">Добавити моделі </a>
+                <a class="navbar-brand" href="{% url 'main:other' page='about' %}">Про нас</a>
+
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                    <div class="navbar-nav">
+                        <div class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Профіль</a>
+
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#">Мои заявки</a>
+                                <a class="dropdown-item" href="#">Змінити пароль</a>
+                                <hr class="dropdown-divider">
+
+                                <form class="px-3">
+                                    {% csrf_token %}
+                                    {% bootstrap_button 'Вийти' button_class='btn-danger' %}
+                                </form>
+
+                                <hr class="dropdown-divider">
+                                <a class="dropdown-item" href="#">Видалити</a>
+                            </div>
+                        </div>
+                        <a class="nav-link" href="#">Реєстрація</a>
+                        <a class="nav-link" href="#">Вхід</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+            <div class="row">
+                <nav class="col-md-auto nav flex-column bg-light">
+                    <span class="nav-link root">Apple</span>
+                    <a class="nav-link" href="#">iPhone 11 Pro</a>
+                    <a class="nav-link" href="#">iPhone 15</a>
+                    <a class="nav-link" href="#">iPhone 16 Pro Max</a>
+                    <span class="nav-link root" href="#">Samsung</span>
+                    <a class="nav-link" href="#">S22 Ultra</a>
+                    <a class="nav-link" href="#">Flip 3</a>
+                </nav>
+                    <main class="col py-2">
+                        {% bootstrap_messages %}
+                        {% block content %}
+                        {% endblock %}
+                    </main>
+            </div>
+        <footer class="mt-3">
+            <p class="text-end fst-italic">&copy; Адмін.</p>
+        </footer>
+    </body>
+</html>
